@@ -121,8 +121,8 @@ default_args = {
 with DAG(
     dag_id="weekly_new_customer_account_check",
     description="Weekly BigQuery check for new customer_account_no not in dim_customermapping; email Data Analytics Team if found.",
-    start_date=datetime(2025, 10, 5, 9, 0, tzinfo=ZoneInfo("Asia/Ho_Chi_Minh")),  # first Sunday ref (no pendulum)
-    schedule_interval="0 9 * * SUN",  # Every Sunday 09:00 Asia/Ho_Chi_Minh
+    start_date=datetime(2025, 10, 5, 9, 0),  # first Sunday ref (no pendulum)
+    schedule_interval="0 9 * * SUN",
     catchup=False,
     default_args=default_args,
     max_active_runs=1,
@@ -131,7 +131,7 @@ with DAG(
         # ---- adjust to your environment ----
         "project_id": "sp-prd-gdt-udp-datalake",
         "bq_conn_id": "google_cloud_default",  # Airflow GCP connection ID
-        "bq_location": "asia-southeast1",      # optional
+        "bq_location": "asia-southeast1",
         "preview_limit": 50,
 
         # For your failure-callback, if it reads these from context:
